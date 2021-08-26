@@ -1,0 +1,10 @@
+{% extends "base.html"%}
+{% block title %}Pas De Resultats {% endblock %}
+{% block content %}
+
+<div class=" shadow-lg p-5 text-center bg-light">
+    <h1 class="mb-3"> Erreur</h1>
+    <h3 class="mb-3"> Pas de resultat pour : {{input}}</h3>
+    <a class="btn btn-primary btn-lg " href="/search" role="button">Page de recherche</a>
+  </div>
+{% endblock %}

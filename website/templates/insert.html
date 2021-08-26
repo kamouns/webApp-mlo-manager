@@ -1,0 +1,53 @@
+{% extends "base.html"%}
+{% block title %}nouveau fichier{% endblock %}
+{% block content %}
+<form  clstyle=" margin: auto; margin-top: 2%;" enctype=multipart/form-data  method="POST">
+    <br>
+    <br>
+
+    <h2 align="center">Nouveau MLO </h2> 
+    <br>    
+    <div style=" border-radius: 5px; padding: 5%;  height: max-content; "  class="form-row mx-sm-5 mb-2  shadow rounded">
+        <div  class="col-md-10">
+           <label  for="file"><h2 style="  padding: 5px;" > Nouveau Fichier</h2> </label>
+          <input 
+           style="border-radius:    5px;
+           background: #ffe8d8;
+           padding: 3% ;
+           width: 95%;
+           height: 50%;
+           align-self: center;"
+           type="file" 
+           class="form-control-file  form-control-lg shadow"
+           name="file" 
+           id="file" >
+        </div>
+            <div class="col-md-2 mb-2 ">
+              <label for=" MLOtype"> <h2 style=" text-align: center; padding: 5px;">type de MLO</h2></label>
+              <select 
+              style="border-radius: 15px;
+                    width: 100%;
+                    align-self: center;"
+                class="form-control shadow"
+                name ="MLOtype"    >
+              <option>N/A               </option>
+              <option>1+0, no protection</option>
+              <option>1+1,HSB           </option>
+              <option>1+1,HSB+SD        </option>
+              <option>1+1,XPIC          </option>
+              <option>2+0,              </option>
+              <option>2+0,HSB+SD        </option>
+              <option>2+0,XPIC          </option>
+              <option>2+0,XPIC+HSB      </option>
+              <option>2+2,XPIC+HSB      </option>
+              
+              </select>
+              <button
+               style="margin-top: 10% ;
+                      margin-left:8%; "
+               type="submit"
+               class="btn btn-outline-success btn-lg shadow" >Enregistrer </button>
+            </div>
+    </div>  
+</form>
+{% endblock %}

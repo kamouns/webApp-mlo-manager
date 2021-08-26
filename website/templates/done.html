@@ -1,0 +1,13 @@
+{% extends "base.html"%}
+{% block title %}notif{% endblock %}
+{% block content %}
+
+<div class=" shadow-lg p-5 text-center bg-light">
+    <h1 class="mb-3">le fichier : {{F}}  est Enregistré</h1>
+    <h4 class="mb-3"> type du lien : {{T}}</h4>
+    <form action="/result"  method="POST">
+      <input style="margin-bottom: 2%;" type="submit"class="btn btn-success  btn-lg shadow-sm" value="{{F}}" name='F_inside_done'>
+    </form>
+    <a class="btn btn-primary btn-lg " href="/" role="button">Page d'Acceuil</a>
+  </div>
+{% endblock %}

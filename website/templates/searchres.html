@@ -1,0 +1,53 @@
+{% extends "base.html"%}
+{% block title %}Resultat{% endblock %}
+{% block content %}
+
+<br>
+<h1 align="center">Resultats  </h1>
+<br>
+<div style="width: 50%;  margin-left: auto;margin-right: auto;">
+    <ul  align="center" class="list-group list-group-flush " >
+    
+        {% for fname in fln %}
+        <li class="list-group-item list-group-item-action shadow">
+                    <form style="margin-bottom:-4%;" method="POST" action="/result" >
+                    <input  class="btn btn-lg" type="submit" value ="{{fname}}" name="button">
+                    </form>
+                    <button  class=" close" data-toggle="modal" data-target="#{{fname}}" > <span aria-hidden="true">
+                        &times;
+                </li>
+                </span></button>
+                
+        {% endfor %}
+    
+    </ul>
+    
+</div>
+
+{% for fname in fln1 %}
+
+
+
+  <div class="modal fade" id="{{fname}}" tabindex="-1" role="dialog" aria-labelledby="Label" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="Label">Supprimer le fichier ?</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <p>Voulez vous supprimer  le fichier {{fname[:-5]}}</p>
+          </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler  </button>
+          <form   method="POST" action="/result">
+              <button class=" btn btn-danger" type="submit" value ="{{fname}},{{mloName}}"  name="closeS">Supprimer</button>
+        </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+{% endblock %}

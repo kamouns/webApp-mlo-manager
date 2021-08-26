@@ -1,0 +1,191 @@
+{% extends "base.html"%}
+{% block title %}result{% endblock %}
+{% block content %}
+<br>
+<h1 style="text-align:center;
+           padding-bottom: 10px;
+           padding-top: 20px;"> {{fnx }} </h1>
+<br>
+
+<table style="text-align:center ;width: 98%; margin-left: auto;margin-right: auto; font-size: larger; "
+  class="table table-bordered">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col" style="vertical-align: middle;">Link ID</th>
+      <th scope="col" style="vertical-align: middle;">date de creation du MLO</th>
+      <th scope="col" style="vertical-align: middle;">Capacity</th>
+      <th scope="col" style="vertical-align: middle;">length </th>
+      <th scope="col" style="vertical-align: middle;">Calc_Meth</th>
+      <th scope="col" style="vertical-align: middle;">Type du lien </th>
+      <th scope="col" style="vertical-align: middle;">Changer le Type </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td  style="vertical-align: middle;">{{sh['B'+ '26'].value}} </td>
+      <td  style="vertical-align: middle;">{{sh['B'+ '2'].value[17:]}}</td>
+      <td  style="vertical-align: middle;">{{sh['B'+ '27'].value}} </td>
+      <td  style="vertical-align: middle;">{{sh['D'+ '26'].value}} </td>
+      <td  style="vertical-align: middle;">{{sh['D'+ '27'].value}} </td>
+      <td  style="vertical-align: middle;"><p>{{sh['C'+ '3'].value}} </p></td>
+      <td  style="vertical-align: middle;"> <form action="/result"  method="POST">
+        <select  style="border-radius: 5px;width: 100%;align-self: center;"class="form-control shadow-sm"name ="MLOtype">
+        <option>N/A               </option>
+        <option>1+0, no protection</option>
+        <option>1+1,HSB           </option>
+        <option>1+1,HSB+SD        </option>
+        <option>1+1,XPIC          </option>
+        <option>2+0,              </option>
+        <option>2+0,HSB+SD        </option>
+        <option>2+0,XPIC          </option>
+        <option>2+0,XPIC+HSB      </option>
+        <option>2+2,XPIC+HSB      </option>
+        
+        </select>
+        <button style="margin-top: 5% ;margin-left:8%; "type="submit"class="btn btn-outline-success  shadow-sm" value="{{fnx}}" name='F_inside_result'>Enregistrer </button>
+      </form></td>
+    </tr>
+  </tbody>
+</table>
+
+<table style="text-align:center ;table-layout:fixed;width: 98%; margin-left: auto;margin-right: auto;font-size: large; "
+  class="table table-hover table-bordered  border-primary border-2">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col" style="width: 12%;"> </th>
+      <th scope="col" style="width: 20%;"> </th>
+      <th scope="col"> END A</th>
+      <th scope="col"> END B</th>
+    </tr>
+  </thead>
+  <tbody>
+    <th scope="row" rowspan="6" style="vertical-align: middle; background-color: rgb(236, 236, 236);">LINK Ends</th>
+    <tr class="table-warning">
+
+      {%for l in ['B','C','D']%}
+      <th>{{sh[l+ '30' ].value}}</th>
+      {% endfor %}
+    </tr>
+    {%for i in range (31,35)%}
+    <tr>
+
+      {%for l in ['B','C','D']%}
+      <td>{{sh[l+ i|string ].value}}</td>
+      {% endfor %}
+    </tr>
+    {% endfor %}
+
+    <tr>
+      <th> </th>
+    </tr>
+
+    <th scope="row" rowspan="7" style="vertical-align: middle; background-color: rgb(236, 236, 236);">Frequency</th>
+    <tr class="table-warning">
+
+      {%for l in ['B','C','D']%}
+      <th>{{sh[l+ '36' ].value}}</th>
+      {% endfor %}
+    </tr>
+    <tr >
+
+      {%for l in ['B','C','D']%}
+      <td>{{sh[l+ '37' ].value}}</td>
+      {% endfor %}
+    </tr>
+    <tr class="table-warning" style="vertical-align: middle;">
+
+      {%for l in ['B','C','D']%}
+      <th>{{sh[l+ '38' ].value}}</th>
+      {% endfor %}
+    </tr>
+    {%for i in range (39,42)%}
+    <tr>
+
+      {%for l in ['B','C','D']%}
+      <td>{{sh[l+ i|string ].value}}</td>
+      {% endfor %}
+    </tr>
+    {% endfor %}
+    <tr>
+      <th> </th>
+    </tr>
+    <th scope="row" rowspan="10" style="vertical-align: middle; background-color: rgb(236, 236, 236);">Antenna (main)
+    </th>
+    {%for i in range (43,52)%}
+    <tr>
+
+      {%for l in ['B','C','D']%}
+      <td>{{sh[l+ i|string ].value}}</td>
+      {% endfor %}
+    </tr>
+    {% endfor %}
+    <tr>
+      <th> </th>
+    </tr>
+    <th scope="row" rowspan="13" style="vertical-align: middle; background-color: rgb(236, 236, 236);">Radio Equipment
+    </th>
+    <tr class="table-warning">
+      <th> {{sh['B'+ '53' ].value}} </th>
+       <th colspan="2"> {{sh['C'+ '53' ].value}} </th>
+    </tr>
+   
+    <tr class="table-warning">
+      {%for l in ['B','C','D']%}
+      <th>
+        {{sh[l+ '54'].value}}
+        
+      </th>
+      {% endfor %}
+    </tr>
+    <tr>
+      {%for l in ['B','C','D']%}
+      <td>
+        {{sh[l+ '55'].value}}
+        
+      </td>
+      {% endfor %}
+    </tr>
+    <tr>
+      {%for l in ['B','C','D']%}
+      <td>
+        {{sh[l+ '56'].value}}
+        
+      </td>
+      {% endfor %}
+    </tr>
+    <tr class="table-warning">
+      <th> {{sh['B'+ '57' ].value}} </th>
+       <th colspan="2"> {{sh['C'+ '57' ].value}} </th>
+    </tr>
+    <tr>
+      <td> {{sh['B'+ '58' ].value}} </td>
+       <td colspan="2"> {{sh['C'+ '58' ].value}} </td>
+    </tr>
+    {%for i in range (59,65)%}
+    <tr>
+      {%for l in ['B','C','D']%}
+      <td>{% if (sh[l+ i|string ].value)|string != 'None' %}
+        {{sh[l+ i|string ].value}}
+        {%endif%}
+      </td>
+      {% endfor %}
+    </tr>
+    {% endfor %}
+    <tr>
+      <th> </th>
+    </tr>
+    <th scope="row" rowspan="6" style="vertical-align: middle; background-color: rgb(236, 236, 236);">Performance </th>
+    {%for i in range (66,71)%}
+    <tr>
+      {%for l in ['B','C','D']%}
+      <td>{% if (sh[l+ i|string ].value)|string != 'None' %}
+        {{sh[l+ i|string ].value}}
+        {%endif%}
+      </td>
+      {% endfor %}
+    </tr>
+    {% endfor %}
+
+  </tbody>
+</table>
+{% endblock %}
