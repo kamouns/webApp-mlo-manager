@@ -7,7 +7,7 @@ from flask import Blueprint , render_template,request
 import glob
 
 def Filelistfun() :
-    fileslist=glob.glob("website\ExcelFiles/*.xlsx")
+    fileslist=glob.glob("website\ExcelFiles/**/*.xlsx", recursive=True)
     fileslistname=[]
     for f in fileslist: 
         fileslistname.append(str(f).replace('website\ExcelFiles\\',''))
@@ -67,20 +67,21 @@ def result():
                     pass
                 fileslistname= Filelistfun()                
                 if a :
-                    return render_template("all.html" ,fln=reversed(fileslistname),fln1=reversed(fileslistname) )
+                    return render_template("all.html" ,fln=(fileslistname),fln1=(fileslistname) )
                 else :
                     input=(request.form['closeS']).split(',')[1]
                     resultlist=[]
                     for f in fileslistname:
                         if input in f:
                             resultlist.append(f)
-                    return render_template( "searchres.html", mloName=input, fln = reversed(resultlist), fln1=reversed(resultlist) )
+                    return render_template( "searchres.html", mloName=input, fln = (resultlist), fln1=(resultlist) )
     
 
 @search.route('/all')
 def all():
     fileslistname= Filelistfun()
-    return render_template("all.html" ,fln= reversed(fileslistname),fln1=reversed(fileslistname) )
+    print(list.__len__(fileslistname))
+    return render_template("all.html" ,fln= (fileslistname),fln1=(fileslistname) )
 
 @search.route('/searchResult',methods=['GET', 'POST'])
 def searchresult(): 
@@ -95,4 +96,5 @@ def searchresult():
         if list.__len__(resultlist) == 0:
             flash ('pas de resultat' ,category='ERR')
             return render_template("noresult.html", input=input)
-    return render_template( "searchres.html", mloName=input, fln=reversed(resultlist),  fln1=reversed(resultlist) )
+        resultlist.sort()
+    return render_template( "searchres.html", mloName=input, fln=(resultlist),  fln1=(resultlist)  )
