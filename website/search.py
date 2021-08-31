@@ -60,7 +60,6 @@ def result():
             finally :
                 f ='website/ExcelFiles/'+ fn
                 try :
-
                     os.remove(f)
                     flash ('fichier supprimé' ,category='ERR')
                 except:
@@ -96,5 +95,4 @@ def searchresult():
         if list.__len__(resultlist) == 0:
             flash ('pas de resultat' ,category='ERR')
             return render_template("noresult.html", input=input)
-        resultlist.sort()
     return render_template( "searchres.html", mloName=input, fln=(resultlist),  fln1=(resultlist)  )
